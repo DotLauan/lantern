@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER li haixin <lihaixin@15099.net>
+MAINTAINER weilong <wilonx@163.com>
 WORKDIR /root
 RUN apt-get update  && \
         apt-get -y install wget libappindicator3-1 && \

@@ -1,5 +1,5 @@
 FROM daocloud.io/ubuntu:14.04
-MAINTAINER Weilong Wang <wilonx@163.com>
+MAINTAINER weilong <wilonx@163.com>
 WORKDIR /root
 RUN sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
         echo "deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse" >> /etc/apt/sources.list && \
@@ -21,7 +21,7 @@ RUN sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
         apt-get clean && \
         rm -rf /var/cache/apt/* /var/lib/apt/lists/* && \
         mkdir /root/.lantern && \
-        echo "localHTTPToken: wilonlantern" > /root/.lantern/settings.yaml
+        echo "localHTTPToken: wilonlantern" > /root/settings.yaml
 
 EXPOSE 3128/tcp 8080/tcp
 

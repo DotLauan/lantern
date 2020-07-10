@@ -1,0 +1,8 @@
+version: "3"
+services:
+  lantern:
+    build: .
+    restart: always
+    ports:
+      - "3128:3128"
+      - "8080:8080"

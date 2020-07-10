@@ -21,7 +21,14 @@ docker build -t wilon/lantern https://raw.githubusercontent.com/wilon/lantern/ma
 docker run -itd --restart=always --name lantern -p 3128:3128 -p 8080:8080 wilon/lantern
 ```
 
+或者本地源码构建使用 docker-compose
+```
+git clone https://github.com/wilon/lantern.git
+docker-compose up -d
+```
 ## 测试
+
+Win7 系统需将下列 IP 换成 docker IP。 (默认地址: 192.168.99.100)
 
 浏览器打开：http://0.0.0.0:8080/wilonlantern
 
