@@ -10,7 +10,7 @@ RUN apt-get update  && \
         apt-get clean && \
         rm -rf /var/cache/apt/* /var/lib/apt/lists/* && \
         mkdir /root/.lantern && \
-        echo "localHTTPToken: wilonlantern" > /root/.lantern/settings.yaml
+        echo "localHTTPToken: wilonlantern" > /root/settings.yaml
 
 EXPOSE 3128/tcp 8080/tcp
 
