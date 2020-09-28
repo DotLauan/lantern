@@ -19,6 +19,7 @@ if [ ! -f "$dir/version" ]; then
 fi
 
 oldver=`cat "$dir/version"`
+echo "Get old version: $oldver"
 
 if [ "$oldver" = "$version" ]; then
     echo 'Version not change.'
@@ -38,11 +39,14 @@ else
 fi
 
 wget -o /tmp/wget.log -O ./binaries/lantern-installer-64-bit.deb https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-64-bit.deb
+
 sed -i "1c # Docker 运行 $version，科学上网" README.MD
 echo $version > "$dir/version"
 git status
 git add .
+git status
 git commit -m "Travis CI auto update $version ()." &
+git log
 
 
 
