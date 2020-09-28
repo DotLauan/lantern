@@ -37,7 +37,7 @@ else
     echo "Tag: $tag exist"
 fi
 
-wget -o ./binaries/lantern-installer-64-bit.deb https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-64-bit.deb
+wget -o /tmp/wget.log -O ./binaries/lantern-installer-64-bit.deb https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-64-bit.deb
 sed -i "1c # Docker 运行 $version，科学上网" README.MD
 echo $version > "$dir/version"
 git status
