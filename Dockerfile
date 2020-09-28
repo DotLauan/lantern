@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:20.04
 MAINTAINER weilong <wilonx@163.com>
 WORKDIR /root
 RUN apt-get update  && \

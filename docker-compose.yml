@@ -1,7 +1,7 @@
 version: "3"
 services:
   lantern:
-    build: .
+    image: wilon/lantern
     restart: always
     ports:
       - "3128:3128"

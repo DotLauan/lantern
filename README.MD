@@ -13,7 +13,9 @@ docker pull wilon/lantern
 
 或者源码构建，更适合国内网络：
 ```
-docker build -t wilon/lantern https://raw.githubusercontent.com/wilon/lantern/master/Dockerfile-CN
+git clone https://github.com/wilon/lantern.git
+cd ./lantern
+docker build -t wilon/lantern -f Dockerfile-CN .
 ```
 
 启动：
@@ -21,9 +23,10 @@ docker build -t wilon/lantern https://raw.githubusercontent.com/wilon/lantern/ma
 docker run -itd --restart=always --name lantern -p 3128:3128 -p 8080:8080 wilon/lantern
 ```
 
-或者本地源码构建使用 docker-compose
+或者使用 docker-compose
 ```
 git clone https://github.com/wilon/lantern.git
+cd ./lantern
 docker-compose up -d
 ```
 ## 测试
