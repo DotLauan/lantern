@@ -28,16 +28,6 @@ fi
 
 echo 'Version change.'
 
-tag=`echo $version | sed 's/Lantern //g'`
-echo "Latest tag: $tag"
-
-if [ `git tag | grep $tag | wc -l` = 0 ]; then
-    echo "New tag: $tag"
-    git tag "$tag"
-else
-    echo "Tag: $tag exist"
-fi
-
 wget -o /tmp/wget.log -O ./binaries/lantern-installer-64-bit.deb https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-64-bit.deb
 
 sed -i "1c # Docker 运行 $version，科学上网" README.MD
@@ -48,6 +38,12 @@ git status
 git commit -m "Travis CI auto update $version ()." &
 git log
 
+tag=`echo $version | sed 's/Lantern //g'`
+echo "Latest tag: $tag"
 
-
-
+if [ `git tag | grep $tag | wc -l` = 0 ]; then
+    echo "New tag: $tag"
+    git tag "$tag"
+else
+    echo "Tag: $tag exist"
+fi

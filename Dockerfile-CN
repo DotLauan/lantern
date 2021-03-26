@@ -13,9 +13,8 @@ RUN sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
         echo "deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
         echo "deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
         apt-get update  && \
-        apt-get -y install wget libappindicator3-1 && \
-        git clone https://github.com/wilon/lantern.git && \
-        dpkg -i ./lantern/binaries/lantern-installer-64-bit.deb && \
+        apt-get -y install wget libappindicator3-1 libpcap0.8 && \
+        dpkg -i ./binaries/lantern-installer-64-bit.deb && \
         apt-get -f install && \
         apt-get clean && \
         rm -rf ./lantern /var/cache/apt/* /var/lib/apt/lists/* && \
