@@ -1,34 +1,33 @@
-# Docker 运行 Lantern 6.6.1，科学上网
-[![Build Status](https://travis-ci.org/wilon/lantern.svg?branch=master)](https://travis-ci.org/wilon/lantern)
-```diff
-+ 输入我的邀请码 YMD8TTG 来获得三个月的蓝灯专业版！
-- 输入我的邀请码 YMD8TTG 来获得三个月的蓝灯专业版！
-```
+# Docker 运行 Lantern 7.4.9，科学上网
 
 ## 安装方法
 
-```
+```bash
 docker pull wilon/lantern
 ```
 
-或者源码构建，更适合国内网络：
-```
+或者源码构建，更适合国内网络：（安装版本固定为 7.4.9，lantern 会自更新，或者下载最新版到 binaries/lantern-installer-64-bit.deb，再 build。）
+
+```bash
 git clone https://github.com/wilon/lantern.git
 cd ./lantern
 docker build -t wilon/lantern -f Dockerfile-CN .
 ```
 
 启动：
-```
+
+```bash
 docker run -itd --restart=always --name lantern -p 3128:3128 -p 8080:8080 wilon/lantern
 ```
 
 或者使用 docker-compose
-```
+
+```bash
 git clone https://github.com/wilon/lantern.git
 cd ./lantern
 docker-compose up -d
 ```
+
 ## 测试
 
 Win7 系统需将下列 IP 换成 docker IP。 (默认地址: 192.168.99.100)

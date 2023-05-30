@@ -3,7 +3,7 @@ MAINTAINER weilong <wilonx@163.com>
 WORKDIR /root
 RUN apt-get update  && \
         apt-get -y install wget libappindicator3-1 libpcap0.8 && \
-        wget https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-64-bit.deb && \
+        wget https://github.com/getlantern/lantern-binaries/raw/main/lantern-installer-64-bit.deb && \
         dpkg -i lantern-installer-64-bit.deb && \
         rm -rf lantern-installer-64-bit.deb && \
         apt-get -f install && \
