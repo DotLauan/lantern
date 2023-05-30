@@ -1,12 +1,12 @@
 name: AutoUpdateLantern
 
 on:
-  # 不能on push，有自动 push，避免死循环
+  # 测试用
   watch:
     types: started
-
-env:
-  NEW_VERSION: Default
+  # 每天更新
+  schedule:
+    - cron: '0 8 * * *'
 
 jobs:
   build:
