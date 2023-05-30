@@ -1,0 +1,20 @@
+name: AutoUpdateLantern
+
+on:
+  # 不能on push，有自动 push，避免死循环
+  watch:
+    types: started
+
+env:
+  NEW_VERSION: Default
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run check_update.sh
+      run: |
+        chmod +x ./check_update.sh
+        ./check_update.sh
+
