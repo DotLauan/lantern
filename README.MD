@@ -1,4 +1,4 @@
-# Docker 运行 Lantern 7.4.9，科学上网
+# Docker 运行 Lantern 7.5.0，科学上网
 
 ## 安装方法
 
