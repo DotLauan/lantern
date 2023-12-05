@@ -1,26 +1,29 @@
-FROM daocloud.io/ubuntu:20.04
+FROM ubuntu:jammy-20231128
 MAINTAINER weilong <wilonx@163.com>
 WORKDIR /root
-RUN sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
-        echo "deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse" >> /etc/apt/sources.list && \
-        echo "deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse" >> /etc/apt/sources.list && \
-        echo "deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse" >> /etc/apt/sources.list && \
-        echo "deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse" >> /etc/apt/sources.list && \
-        echo "deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
-        echo "deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
-        echo "deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse" >> /etc/apt/sources.list && \
-        echo "deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse" >> /etc/apt/sources.list && \
-        echo "deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
-        echo "deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
-        apt-get update  && \
-        apt-get -y install wget libappindicator3-1 libpcap0.8 && \
-        dpkg -i ./binaries/lantern-installer-64-bit.deb && \
-        apt-get -f install && \
-        apt-get clean && \
-        rm -rf ./lantern /var/cache/apt/* /var/lib/apt/lists/* && \
-        mkdir /root/.lantern && \
-        echo "localHTTPToken: wilonlantern" > /root/settings.yaml
+ADD ./binaries/lantern-installer-64-bit.deb /root/
+RUN . /etc/os-release && \
+mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
+echo "deb [trusted=yes] https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME} main restricted universe multiverse \
+deb-src [trusted=yes] https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME} main restricted universe multiverse \
+deb [trusted=yes] https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-security main restricted universe multiverse \
+deb-src [trusted=yes] https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-security main restricted universe multiverse \
+deb [trusted=yes] https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-updates main restricted universe multiverse \
+deb-src [trusted=yes] https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-updates main restricted universe multiverse \
+deb [trusted=yes] https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-backports main restricted universe multiverse \
+deb-src [trusted=yes] https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-backports main restricted universe multiverse \
+deb [trusted=yes] https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-proposed main restricted universe multiverse \
+deb-src [trusted=yes] https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-proposed main restricted universe multiverse " > /etc/apt/sources.list && \
+apt-get -o "Acquire::https::Verify-Peer=false" update && \
+apt-get -o "Acquire::https::Verify-Peer=false" install -y ca-certificates && \
+apt-get install -y wget libayatana-appindicator3-1 libpcap0.8 && \
+dpkg -i ./lantern-installer-64-bit.deb && \
+apt-get -f install && \
+apt-get clean && \
+rm -rf ./lantern-installer-64-bit.deb /var/cache/apt/* /var/lib/apt/lists/* && \
+mkdir /root/.lantern && \
+echo "localHTTPToken: wilonlantern" > /root/settings.yaml
 
-EXPOSE 3128/tcp 8080/tcp
+EXPOSE 3128/tcp 3129/tcp 8080/tcp
 
-ENTRYPOINT ["/usr/bin/lantern", "--configdir=/root", "--headless=true", "--proxyall=true", "--startup=false", "--clear-proxy-settings=false", "--addr=0.0.0.0:3128", "--uiaddr=0.0.0.0:8080"]
+ENTRYPOINT ["/usr/bin/lantern", "--configdir=/root", "--headless=true", "--proxyall=true", "--startup=false", "--clear-proxy-settings=false", "--addr=0.0.0.0:3128", "--uiaddr=0.0.0.0:8080", "--socksaddr=0.0.0.0:3129"]

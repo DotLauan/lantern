@@ -17,7 +17,7 @@ docker build -t wilon/lantern -f Dockerfile-CN .
 启动：
 
 ```bash
-docker run -itd --restart=always --name lantern -p 3128:3128 -p 8080:8080 wilon/lantern
+docker run -itd --restart=always --name lantern -p 3128:3128 -p 3129:3129 -p 8080:8080 wilon/lantern
 ```
 
 或者使用 docker-compose
